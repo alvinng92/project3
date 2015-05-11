@@ -1,0 +1,9 @@
+forecast_io_base_url: "https://api.forecast.io/forecast"
+forecast_io_options : "?units=ca" #ca gives speed in kph!
+bom_base_url:         "http://www.bom.gov.au"
+bom_melbourne_url:    "http://www.bom.gov.au/vic/observations/melbourne.shtml"
+data_list:            ["obs-rainsince9am","obs-temp","obs-dewpoint",
+                   "obs-wind-dir","obs-wind-spd-kph"]
+model_hash:            {"obs-rainsince9am" : "Rainfall","obs-temp" : "Temperature","obs-dewpoint" : "Dewpoint","obs-wind-dir" : "WindDirection","obs-wind-spd-kph" : "WindSpeed"}
+fcio_list:            ["dewPoint", "precipIntensity", "temperature", "windSpeed","windBearing"]
+fcio_hash:            {"dewPoint" : "Dewpoint", "precipIntensity" : "Rainfall", "temperature" : "Temperature", "windSpeed" : "WindSpeed", "windBearing" : "WindDirection"}

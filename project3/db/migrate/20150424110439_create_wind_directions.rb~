@@ -1,0 +1,9 @@
+class CreateWindDirections < ActiveRecord::Migration
+  def change
+    create_table :wind_directions do |t|
+      t.integer :value_degrees
+
+      t.timestamps null: false
+    end
+  end
+end

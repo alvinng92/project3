@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rain_since_9am: 9.99
+  temp: 9.99
+  dewpoint: 9.99
+  wind_dir: MyString
+  wind_spd_kph: 1
+  location_id: 
+
+two:
+  rain_since_9am: 9.99
+  temp: 9.99
+  dewpoint: 9.99
+  wind_dir: MyString
+  wind_spd_kph: 1
+  location_id: 

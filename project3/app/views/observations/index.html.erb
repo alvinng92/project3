@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Observations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rain since 9am</th>
+      <th>Temp</th>
+      <th>Dewpoint</th>
+      <th>Wind dir</th>
+      <th>Wind spd kph</th>
+      <th>Location</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @observations.each do |observation| %>
+      <tr>
+        <td><%= observation.rain_since_9am %></td>
+        <td><%= observation.temp %></td>
+        <td><%= observation.dewpoint %></td>
+        <td><%= observation.wind_dir %></td>
+        <td><%= observation.wind_spd_kph %></td>
+        <td><%= observation.location %></td>
+        <td><%= link_to 'Show', observation %></td>
+        <td><%= link_to 'Edit', edit_observation_path(observation) %></td>
+        <td><%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Observation', new_observation_path %>
