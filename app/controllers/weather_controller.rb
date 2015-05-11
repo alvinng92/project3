@@ -22,4 +22,14 @@ class WeatherController < ApplicationController
   end
   def forecast
   end
+  # API methods
+  def get_locations
+    render json: {:test => "success"}.to_json
+  end
+  def get_data
+    render json: {:data => ""}.to_json
+  end
+  def get_data_pc
+    render json: {:data => ""}.to_json
+  end
 end

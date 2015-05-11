@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
   resources :observations
   resources :locations
-  resources :observations
-  resources :locations
   get 'weather/data'
 
   get 'weather/forecast'
 
   get 'home/index'
+
+  # API routes ---> [methods in WeatherController]
+  get '/weather/locations'                      => 'weather#get_locations'
+  get '/weather/data/:location_id/:date'        => 'weather#get_data'
+  get '/weather/data/:post_code/:date'          => 'weather#get_data_pc'
+  # get '/weather/predicition/:post_code/:period' => # eg. 'prediction#get()'
+  # get '/weather/predicition/:lat/:long/:period' =>
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
