@@ -1,9 +1,0 @@
-class CreateDewpoints < ActiveRecord::Migration
-  def change
-    create_table :dewpoints do |t|
-      t.decimal :value_celsius
-
-      t.timestamps null: false
-    end
-  end
-end

@@ -1,9 +1,0 @@
-class CreateWindSpeeds < ActiveRecord::Migration
-  def change
-    create_table :wind_speeds do |t|
-      t.decimal :value_kph
-
-      t.timestamps null: false
-    end
-  end
-end
