@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WeatherApp</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'default', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+<style>
+.bb {
+	background: url('http://www.fabiovisentin.com//photography/photo/25/sunshine-skydsc03148.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+</style>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+	<div class="navbar-header">
+          <%= link_to "Weather App", root_path, class: 'navbar-brand' %>
+	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navHeaderCollapse">
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	  </button>
+	</div>
+	<div class="collapse navbar-collapse" id="navHeaderCollapse">
+	  <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Weather Data", weather_data_path, class: 'btn btn-default1 navbar-btn ' %></li>
+	    <li><%= link_to "Weather Forecast", weather_forecast_path, class: 'btn btn-default navbar-btn ' %></li>
+	  </ul>
+	</div>
+      </div>
+    </div>
+<div class="container bb">
+  <%= yield %>
+
+</body>
+</html>

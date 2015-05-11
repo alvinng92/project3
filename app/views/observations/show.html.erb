@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rain since 9am:</strong>
+  <%= @observation.rain_since_9am %>
+</p>
+
+<p>
+  <strong>Temp:</strong>
+  <%= @observation.temp %>
+</p>
+
+<p>
+  <strong>Dewpoint:</strong>
+  <%= @observation.dewpoint %>
+</p>
+
+<p>
+  <strong>Wind dir:</strong>
+  <%= @observation.wind_dir %>
+</p>
+
+<p>
+  <strong>Wind spd kph:</strong>
+  <%= @observation.wind_spd_kph %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @observation.location %>
+</p>
+
+<%= link_to 'Edit', edit_observation_path(@observation) %> |
+<%= link_to 'Back', observations_path %>

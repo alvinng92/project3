@@ -1,0 +1,15 @@
+class CreateObservations < ActiveRecord::Migration
+  def change
+    create_table :observations do |t|
+      t.decimal :rain_since_9am
+      t.decimal :temp
+      t.decimal :dewpoint
+      t.string :wind_dir
+      t.integer :wind_spd_kph
+      t.references :location, index: true, foreign_key: true
+
+      t.timestamps null: false
+    end
+    add_foreign_key :observations, :locations
+  end
+end

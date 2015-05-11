@@ -1,0 +1,77 @@
+namespace :data do
+  namespace :get do
+    desc "Get current bom data and store in db"
+    task :bom => :environment do
+      require 'nokogiri'
+      require 'open-uri'
+
+      def get_lat_long(link)
+        extract = /\-*[0-9]+\.*[0-9]*/
+        url = "#{APP_CONFIG['bom_base_url']}#{link}"
+        d = Nokogiri::HTML(open(url))
+        lat = d.css(".stationdetails td:nth-child(4)").text[extract]
+        long = d.css(" .stationdetails td:nth-child(5)").text[extract]
+        return "#{lat},#{long}"
+      end
+
+      offset = 2
+
+      doc = Nokogiri::HTML(open(APP_CONFIG['bom_melbourne_url']))
+
+      stations = doc.css("#tMELBOURNE").css("th[id^=obs-station-]")
+      stations.each do |station|
+        l = Location.find_or_create_by(name: station.text)
+        if (l.lat_long == nil) 
+          l.lat_long = get_lat_long(station.css('a').attribute("href"))
+          l.save
+        end
+
+        dt = Daytime.new(date: Date.today.to_s, time: Time.now.strftime("%H:%M"), location_id: l.id)
+        dt.save
+        o  = Observation.new(source: "bom", daytime_id: dt.id)
+        o.save
+        
+        # run through list of data needed and add appropriate records
+        APP_CONFIG['data_list'].each do |data_name|
+          val = station.parent.children.css("td[headers~= #{data_name}]").text
+          n = APP_CONFIG['model_hash'][data_name].classify.constantize.new(value: val)
+          n.observation_id = o.id
+          n.save
+        end		 
+      end
+    end
+
+    desc "Get weather data from forecast.io website and store in db"
+    task :forecast_io => :environment do
+      require 'nokogiri'
+      require 'open-uri'
+      require 'json'
+
+      base_url = APP_CONFIG['forecast_io_base_url']
+      api_key  = Rails.application.secrets.forecast_io_api_key
+      opts     = APP_CONFIG['forecast_io_options']
+
+      latlong = Location.pluck(:lat_long)
+      
+      latlong.each do |station|
+        data = JSON.parse(open("#{base_url}/#{api_key}/#{station}#{opts}",
+            {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read)
+        l = Location.find_by lat_long: station
+        # dt = Daytime.new(date: Date.today.to_s, time: Time.now.strftime("%H:%M"), location_id: l.id)
+        # dt.save
+        dt = Daytime.where(:location_id => l.id).last
+        o  = Observation.new(source: "forecast_io", daytime_id: dt.id)
+        o.save
+        current = data["currently"]
+        APP_CONFIG['fcio_list'].each do |data_name|
+          val = current[data_name]
+          n = APP_CONFIG['fcio_hash'][data_name].classify.constantize.new(value: val)
+          n.observation_id = o.id
+          n.save
+        end
+      end
+    end
+
+    task :all => [:bom , :forecast_io]
+  end
+end
