@@ -1,6 +1,7 @@
 class CreateObservations < ActiveRecord::Migration
   def change
     create_table :observations do |t|
+      t.string :source
       t.decimal :rain_since_9am
       t.decimal :temp
       t.decimal :dewpoint

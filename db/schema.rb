@@ -41,9 +41,14 @@ ActiveRecord::Schema.define(version: 20150424110751) do
 
   create_table "observations", force: :cascade do |t|
     t.string   "source"
+    t.decimal  "rain_since_9am"
+    t.decimal  "temp"
+    t.decimal  "dewpoint"
+    t.string   "wind_dir"
+    t.integer  "wind_spd_kph"
     t.integer  "daytime_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "observations", ["daytime_id"], name: "index_observations_on_daytime_id"
