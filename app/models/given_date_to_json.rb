@@ -1,0 +1,2 @@
+class GivenDateToJson < JsonOut
+end

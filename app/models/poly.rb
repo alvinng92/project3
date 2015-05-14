@@ -1,0 +1,2 @@
+class Poly < Regression
+end

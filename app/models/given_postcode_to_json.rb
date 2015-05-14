@@ -1,0 +1,2 @@
+class GivenPostcodeToJson < JsonOut
+end

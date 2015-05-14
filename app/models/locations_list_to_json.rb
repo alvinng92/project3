@@ -1,0 +1,2 @@
+class LocationsListToJson < JsonOut
+end

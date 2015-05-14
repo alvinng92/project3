@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'prediction/is_valid_postcode?'
+
+  get 'prediction/get_prediction'
+
   resources :observations
   resources :locations
   get 'weather/data'

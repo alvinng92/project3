@@ -1,0 +1,2 @@
+class Regression < CurveFit
+end

@@ -1,0 +1,2 @@
+class GivenLatLongPeriod < JsonOut
+end
