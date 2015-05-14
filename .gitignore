@@ -11,6 +11,9 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
+#ignore the gem file created when you bundle install
+Gemfile.lock
+
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
